@@ -1,0 +1,232 @@
+@@charset "UTF-8";
+
+* {
+  margin: 0;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+body {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 20px 1fr 20px;
+  grid-template-rows:
+                [head]100px
+                [title]auto
+                [sub]auto
+                [recent]auto
+                [foot]100px;
+  grid-row-gap: 20px;
+  row-gap: 20px;
+  font-family: sans-serif;
+}
+
+body > * {
+  grid-column: 2/ -2;
+}
+
+header {
+  grid-row: head;
+  /* 横方向の表示位置 */
+  justify-self: center;
+  /* 縦方向の表示位置 */
+  align-self: center;
+  font-size: 40px;
+  color: #555d6b;
+  font-family: 'Raleway', sans-serif;
+}
+
+nav {
+  grid-row: head;
+  /* 横方向の表示位置 */
+  justify-self: center;
+  /* 縦方向の表示位置（下揃え） */
+  align-self: end;
+}
+
+nav ul {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  /* ulを横並びに自動配置 */
+  grid-auto-flow: column;
+  grid-column-gap: 20px;
+  column-gap: 20px;
+}
+
+nav a {
+  color: #666666;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* カーソルを重ねたとき */
+nav a:hover {
+  color: #ef9504;
+}
+
+figure {
+  margin: 0;
+}
+
+figure.hero {
+  grid-column: 1 / -1;
+  /* titleから2行分 */
+  grid-row: title / span 2;
+}
+
+figure.hero img {
+  height: 547px;
+  /* 画像切り出し&縦横比維持 */
+  object-fit: cover;
+  vertical-align: bottom;
+  filter: brightness(70%);
+  /* 重なり順を設定（数値が大きいほど上になる） */
+  z-index: -1;
+  position: relative;
+}
+
+h1 {
+  grid-row: title;
+  /* ボックスそのものの横方向の位置揃え */
+  justify-self: center;
+  /* ボックスそのものの縦方向の位置揃え */
+  align-self: center;
+  color: #ffffff;
+  font-size: 50px;
+  /* 文字の太さ */
+  font-weight: normal;
+  /* 行の高さ（フォントサイズの1.2倍） */
+  line-height: 1.2;
+  /* 影を横縦にずらす、影の太さ、影の色 */
+  text-shadow: 0 0 5px #444444;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+p {
+  grid-row: sub;
+  text-align: center;
+}
+
+p a {
+  color: #ffffff;
+  text-decoration: none;
+  border: solid 1px #ffffff;
+  padding: 10px 40px;
+  display: inline-block;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: rgba(85, 93, 107, 0.5);
+}
+
+p a:hover {
+  background-color: #ef9504;
+}
+
+p img {
+  width: 250px;
+}
+
+section {
+  grid-row: recent;
+  display: grid;
+  /* 1:1の比率で2列作る */
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px 10px;
+  gap: 20px 10px;
+}
+
+section a {
+  color: #000000;
+  text-decoration: none;
+}
+
+section a:hover {
+  text-decoration: underline;
+}
+
+section h2 {
+  grid-column: 1 / -1;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  text-align: center;
+}
+
+section h3 {
+  font-size: 14px;
+}
+
+footer {
+  grid-row: foot;
+  justify-self: center;
+  align-self: center;
+  font-size: 13px;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* bodyの直下に疑似要素作成（コピーライトの背景） */
+body::after {
+  content: "";
+  background-color: #eeeeee;
+  grid-column: 1 / -1;
+  grid-row: foot;
+  z-index: -1;
+}
+
+/* PC版：レスポンシブ */
+@@media (min-width: 768px) {
+  body {
+    grid-template-columns: 0.2fr repeat(6, 1fr) 0.2fr;
+    grid-column-gap: 5%;
+    column-gap: 5%;
+    grid-template-rows:
+                  [head]100px
+                  [title sub]auto
+                  [recent]auto
+                  [foot]100px;
+  }
+
+  figure.hero {
+    grid-row: title;
+    margin-top: -20px;
+  }
+
+  h1 {
+    grid-column: 2 /span 3;
+    max-width: 460px;
+  }
+
+  p {
+    grid-column: 5 / span 3;
+    align-self: center;
+  }
+
+  p img {
+    width: 80%;
+    max-width: 460px;
+  }
+
+  header {
+    /* 左揃え */
+    justify-self: start;
+  }
+
+  nav {
+    /* 右揃え */
+    justify-self: end;
+    align-self: center;
+  }
+
+  section {
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    column-gap: 20px;
+  }
+}
